@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ToolTip from '../Tooltip'
 
 const BasicSettings = ({
 	setGeneratorObject,
@@ -17,7 +18,13 @@ const BasicSettings = ({
 	return (
 		<>
 			<label htmlFor='title'>
-				<p>Title</p>
+				<p>
+					Title{' '}
+					<ToolTip
+						message='Will usually be the store name for branding'
+						iconLabel='information'
+					/>
+				</p>
 				<input
 					type='text'
 					value={title}
@@ -26,7 +33,13 @@ const BasicSettings = ({
 				/>
 			</label>
 			<label htmlFor='qr_size'>
-				<p>Size</p>
+				<p>
+					Size{' '}
+					<ToolTip
+						message='Size can range from 128 - 400'
+						iconLabel='information'
+					/>
+				</p>
 				<input
 					type='range'
 					min={128}
