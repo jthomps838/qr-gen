@@ -4,9 +4,13 @@ import ToolTip from '../Tooltip'
 const BasicSettings = ({
 	setGeneratorObject,
 	generatorObject,
-	generatorObject: { size: initialSize, includeMargin: initialIncludeMargin },
+	generatorObject: {
+		size: initialSize,
+		includeMargin: initialIncludeMargin,
+		title: initialTitle,
+	},
 }) => {
-	const [title, setTitle] = useState('')
+	const [title, setTitle] = useState(initialTitle)
 	const [size, setSize] = useState(initialSize)
 	const [includeMargin, setIncludeMargin] = useState(initialIncludeMargin)
 

@@ -56,7 +56,11 @@ const StepControls = styled.footer`
 	}
 `
 
-export const QRWidget = ({ setGeneratorObject, generatorObject }) => {
+export const QRWidget = ({
+	setGeneratorObject,
+	generatorObject,
+	setConfirmed,
+}) => {
 	const [widgetStep, setWidgetStep] = useState(0)
 	const [lastStep, setLastStep] = useState(false)
 
@@ -105,7 +109,7 @@ export const QRWidget = ({ setGeneratorObject, generatorObject }) => {
 					Back
 				</button>
 				{lastStep ? (
-					<button onClick={() => setWidgetStep(widgetStep + 1)}>Confirm</button>
+					<button onClick={() => setConfirmed(true)}>Confirm</button>
 				) : (
 					<button
 						onClick={() => setWidgetStep(widgetStep + 1)}
