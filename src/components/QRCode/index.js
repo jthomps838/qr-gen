@@ -27,8 +27,8 @@ const defaultGeneratorObject = {
 	includeMargin: false,
 	imageSettings: {
 		src: 'none',
-		width: 25,
-		height: 25,
+		width: 0,
+		height: 0,
 		excavate: true,
 	},
 }
