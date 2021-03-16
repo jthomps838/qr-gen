@@ -14,14 +14,35 @@ const WidgetContainer = styled.section`
 const StepContainer = styled.main`
 	display: flex;
 	flex-direction: column;
-	min-height: 200px;
+	min-height: 300px;
 	min-width: 340px;
 	justify-content: space-evenly;
 	padding: 0 10px;
+
+	label {
+		font-size: 20px;
+		font-weight: bold;
+		display: flex;
+		flex-direction: column;
+
+		p {
+			margin: 5px 0;
+
+			button {
+				padding: 0;
+			}
+		}
+	}
+
+	input,
+	select {
+		font-size: 20px;
+		min-width: 100%;
+		padding: 3px;
+	}
 `
 
 const StepControls = styled.footer`
-	min-height: 150px;
 	margin: 20px 0;
 	padding: 10px 5px;
 	display: flex;

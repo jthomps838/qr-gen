@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ToolTip from '../Tooltip'
 
 const LogoSettings = ({
 	setGeneratorObject,
@@ -26,7 +27,10 @@ const LogoSettings = ({
 	return (
 		<>
 			<label htmlFor='src'>
-				Image Source
+				<p>
+					Image Source{' '}
+					<ToolTip message='Please enter a valid url' iconLabel='information' />
+				</p>
 				<input
 					type='text'
 					value={src}
@@ -35,7 +39,7 @@ const LogoSettings = ({
 				/>
 			</label>
 			<label htmlFor='height'>
-				Height
+				<p>Height</p>
 				<input
 					type='number'
 					id='height'
@@ -44,7 +48,7 @@ const LogoSettings = ({
 				/>
 			</label>
 			<label htmlFor='width'>
-				Width
+				<p>Width</p>
 				<input
 					type='number'
 					id='height'

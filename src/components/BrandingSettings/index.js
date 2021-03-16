@@ -16,7 +16,7 @@ const BrandingSettings = ({
 	return (
 		<>
 			<label htmlFor='fgColor'>
-				Color
+				<p>Color</p>
 				<input
 					type='color'
 					value={fgColor}
@@ -25,7 +25,7 @@ const BrandingSettings = ({
 				/>
 			</label>
 			<label htmlFor='bgColor'>
-				Background Color
+				<p>Background Color</p>
 				<input
 					type='color'
 					id='bgColor'

@@ -17,7 +17,7 @@ const BasicSettings = ({
 	return (
 		<>
 			<label htmlFor='title'>
-				Title
+				<p>Title</p>
 				<input
 					type='text'
 					value={title}
@@ -26,7 +26,7 @@ const BasicSettings = ({
 				/>
 			</label>
 			<label htmlFor='qr_size'>
-				Size
+				<p>Size</p>
 				<input
 					type='range'
 					min={128}
@@ -37,7 +37,7 @@ const BasicSettings = ({
 				/>
 			</label>
 			<label htmlFor='include_margins'>
-				Do you want to add margins?
+				<p>Do you want to add margins?</p>
 				<select
 					id='include_margins'
 					onChange={(e) =>
