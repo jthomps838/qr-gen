@@ -21,7 +21,8 @@ const StepContainer = styled.main`
 `
 
 const StepControls = styled.footer`
-	border: 1px solid #33ff00;
+	min-height: 150px;
+	margin: 20px 0;
 	padding: 10px 5px;
 	display: flex;
 	justify-content: space-evenly;
@@ -36,8 +37,12 @@ const StepControls = styled.footer`
 
 export const QRWidget = ({ setGeneratorObject, generatorObject }) => {
 	const [widgetStep, setWidgetStep] = useState(0)
+	const [lastStep, setLastStep] = useState(false)
 
 	useEffect(() => {
+		if (widgetStep === widgetComponents.length - 1) {
+			setLastStep(true)
+		}
 		if (widgetStep >= widgetComponents.length) {
 			setWidgetStep(widgetStep - 1)
 		} else if (widgetStep < 0) {
@@ -62,6 +67,7 @@ export const QRWidget = ({ setGeneratorObject, generatorObject }) => {
 		<ReviewSettings
 			generatorObject={generatorObject}
 			setWidgetStep={setWidgetStep}
+			setLastStep={() => setLastStep(false)}
 		/>,
 	]
 	return (
@@ -69,17 +75,24 @@ export const QRWidget = ({ setGeneratorObject, generatorObject }) => {
 			<StepContainer>{widgetComponents[widgetStep]}</StepContainer>
 			<StepControls>
 				<button
-					onClick={() => setWidgetStep(widgetStep - 1)}
+					onClick={() => {
+						setLastStep(false)
+						setWidgetStep(widgetStep - 1)
+					}}
 					disabled={widgetStep === 0}
 				>
 					Back
 				</button>
-				<button
-					onClick={() => setWidgetStep(widgetStep + 1)}
-					disabled={widgetStep >= widgetComponents.length}
-				>
-					Next
-				</button>
+				{lastStep ? (
+					<button onClick={() => setWidgetStep(widgetStep + 1)}>Confirm</button>
+				) : (
+					<button
+						onClick={() => setWidgetStep(widgetStep + 1)}
+						disabled={widgetStep >= widgetComponents.length}
+					>
+						Next
+					</button>
+				)}
 			</StepControls>
 		</WidgetContainer>
 	)
