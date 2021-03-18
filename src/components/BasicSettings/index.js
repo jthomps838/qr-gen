@@ -6,36 +6,19 @@ const BasicSettings = ({
 	generatorObject,
 	generatorObject: {
 		size: initialSize,
-		includeMargin: initialIncludeMargin,
-		title: initialTitle,
+		includeMargin: initialIncludeMargin
 	},
 }) => {
-	const [title, setTitle] = useState(initialTitle)
 	const [size, setSize] = useState(initialSize)
 	const [includeMargin, setIncludeMargin] = useState(initialIncludeMargin)
 
 	useEffect(() => {
-		setGeneratorObject({ ...generatorObject, size, includeMargin, title })
+		setGeneratorObject({ ...generatorObject, size, includeMargin })
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [size, includeMargin, title])
+	}, [size, includeMargin])
 
 	return (
 		<>
-			<label htmlFor='title'>
-				<p>
-					Title{' '}
-					<ToolTip
-						message='Will usually be the store name for branding'
-						iconLabel='information'
-					/>
-				</p>
-				<input
-					type='text'
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-					id='title'
-				/>
-			</label>
 			<label htmlFor='qr_size'>
 				<p>
 					Size{' '}

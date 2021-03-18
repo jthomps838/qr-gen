@@ -1,60 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import {NavigationButtons} from '../ButtonGroups'
 import BasicSettings from '../BasicSettings'
 import BrandingSettings from '../BrandingSettings'
 import LogoSettings from '../LogoSettings'
 import ReviewSettings from '../ReviewSettings'
-
-const WidgetContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-`
-
-const StepContainer = styled.main`
-	display: flex;
-	flex-direction: column;
-	min-height: 300px;
-	min-width: 340px;
-	justify-content: space-evenly;
-	padding: 0 10px;
-
-	label {
-		font-size: 20px;
-		font-weight: bold;
-		display: flex;
-		flex-direction: column;
-
-		p {
-			margin: 5px 0;
-
-			button {
-				padding: 0;
-			}
-		}
-	}
-
-	input,
-	select {
-		font-size: 20px;
-		min-width: 100%;
-		padding: 3px;
-	}
-`
-
-const StepControls = styled.footer`
-	margin: 20px 0;
-	padding: 10px 5px;
-	display: flex;
-	justify-content: space-evenly;
-
-	button {
-		width: 150px;
-		height: 30px;
-		font-weight: bold;
-		text-transform: uppercase;
-	}
-`
+import { WidgetContainer, StepContainer, StepControls } from './styles'
 
 export const QRWidget = ({
 	setGeneratorObject,
@@ -65,18 +15,20 @@ export const QRWidget = ({
 	const [lastStep, setLastStep] = useState(false)
 
 	useEffect(() => {
-		if (widgetStep === widgetComponents.length - 1) {
+		if (widgetStep === widgets.length - 1) {
 			setLastStep(true)
 		}
-		if (widgetStep >= widgetComponents.length) {
+		if (widgetStep >= widgets.length) {
 			setWidgetStep(widgetStep - 1)
+			setLastStep(false)
 		} else if (widgetStep < 0) {
 			setWidgetStep(0)
+			setLastStep(false)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [widgetStep])
 
-	const widgetComponents = [
+	const widgets = [
 		<BasicSettings
 			setGeneratorObject={setGeneratorObject}
 			generatorObject={generatorObject}
@@ -97,27 +49,32 @@ export const QRWidget = ({
 	]
 	return (
 		<WidgetContainer>
-			<StepContainer>{widgetComponents[widgetStep]}</StepContainer>
+			<StepContainer>{widgets[widgetStep]}</StepContainer>
 			<StepControls>
-				<button
-					onClick={() => {
+				{lastStep ? 
+				<NavigationButtons 
+				downCB={() => {
+					setLastStep(false)
+					setWidgetStep(widgetStep - 1)
+				}} 
+				downDisabled={widgetStep === 0} 
+				upCB={() => setConfirmed('confirmed')} 
+				upDisabled={widgetStep >= widgets.length} 
+				upText='confirm'
+				/>
+				:
+				<NavigationButtons 
+					downCB={(e) => {
+						e.preventDefault()
 						setLastStep(false)
 						setWidgetStep(widgetStep - 1)
-					}}
-					disabled={widgetStep === 0}
-				>
-					Back
-				</button>
-				{lastStep ? (
-					<button onClick={() => setConfirmed(true)}>Confirm</button>
-				) : (
-					<button
-						onClick={() => setWidgetStep(widgetStep + 1)}
-						disabled={widgetStep >= widgetComponents.length}
-					>
-						Next
-					</button>
-				)}
+					}} 
+					downDisabled={widgetStep === 0} 
+					upCB={(e) => {
+						e.preventDefault()
+						setWidgetStep(widgetStep + 1)}} 
+					upDisabled={widgetStep >= widgets.length} 
+					/>}
 			</StepControls>
 		</WidgetContainer>
 	)
