@@ -26,8 +26,15 @@ const defaultGeneratorObject = {
 	},
 }
 
+const defaultEstablishment = {
+	phone: '555-555-5555',
+	address: '123 Lucky Street,  Atlanta, GA 30075',
+}
+
 const defaultPdfSettings = {
-	displayUrl: false,
+	displayUrl: true,
+	displayPhone: true,
+	displayAddress: true,
 }
 
 export const confirmedLevels = ['open', 'progress', 'confirmed', 'pdf']
@@ -39,17 +46,31 @@ function App({
 	const [generatorObject, setGeneratorObject] = useState(settings)
 	const [confirmed, setConfirmed] = useState(confirmedLevels[0])
 	const [pdfSettings, setPdfSettings] = useState(defaultPdfSettings)
+	const [establishment, setEstablishment] = useState(defaultEstablishment)
 	console.log(confirmed)
 	switch (confirmed) {
 		case 'pdf':
-			return <PDFPreview
-			generatorObject={generatorObject} qr_url={qr_url} pdfSettings={pdfSettings} setPdfSettings={setPdfSettings} setConfirmed={setConfirmed}
-			/>
+			return (
+				<PDFPreview
+					generatorObject={generatorObject}
+					qr_url={qr_url}
+					pdfSettings={pdfSettings}
+					setPdfSettings={setPdfSettings}
+					setConfirmed={setConfirmed}
+					establishment={establishment}
+				/>
+			)
 		case 'confirmed':
 			return <QRPRintWrapper setConfirmed={setConfirmed} />
 		default:
-			return <QRWizard generatorObject={generatorObject} setGeneratorObject={setGeneratorObject} setConfirmed={setConfirmed} qr_url={qr_url} />
-
+			return (
+				<QRWizard
+					generatorObject={generatorObject}
+					setGeneratorObject={setGeneratorObject}
+					setConfirmed={setConfirmed}
+					qr_url={qr_url}
+				/>
+			)
 	}
 }
 

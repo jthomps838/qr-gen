@@ -44,6 +44,16 @@ const styles = StyleSheet.create({
 		fontSize: '8px',
 		color: 'gray',
 	},
+	business_address: {
+		display: 'flex',
+		justifyContent: 'center',
+		flexDirection: 'row',
+		alignItems: 'center',
+		fontSize: '12px',
+		color: 'gray',
+		margin: '0 auto',
+		padding: 0,
+	},
 })
 
 function PDFDocument({
@@ -52,7 +62,9 @@ function PDFDocument({
 	qr_url,
 	tableId = 'Table ID',
 	pdfSettings,
+	establishment,
 }) {
+	console.log(establishment)
 	return (
 		<>
 			<Document style={styles.document}>
@@ -75,6 +87,12 @@ function PDFDocument({
 						/>
 						<Text style={styles.qrUrl}>
 							{pdfSettings.displayUrl ? <p>{qr_url}</p> : null}
+						</Text>
+					</View>
+					<View>
+						<Text style={styles.business_address}>
+							{pdfSettings.displayAddress && <p>{establishment.address} </p>}
+							{pdfSettings.displayPhone && <p>{establishment.phone}</p>}
 						</Text>
 					</View>
 				</Page>

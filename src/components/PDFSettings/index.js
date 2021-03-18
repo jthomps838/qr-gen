@@ -14,6 +14,17 @@ const SettingsBlock = styled.section`
 	margin: 5px;
 `
 
+const SettingsWrapper = styled.section`
+	display: flex;
+	flex-direction: column;
+
+	label {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+	}
+`
+
 const Heading = styled.h3`
 	font-size: 16px;
 	font-weight: bold;
@@ -21,12 +32,14 @@ const Heading = styled.h3`
 `
 
 const PDFSettings = ({ settings, setSettings }) => {
-	const [displayUrl, setDisplayUrl] = useState(false)
+	const [displayUrl, setDisplayUrl] = useState(settings.displayUrl)
+	const [displayAddress, setDisplayAddress] = useState(settings.displayAddress)
+	const [displayPhone, setDisplayPhone] = useState(settings.displayPhone)
 
 	useEffect(() => {
-		setSettings({ ...settings, displayUrl })
+		setSettings({ ...settings, displayUrl, displayAddress, displayPhone })
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [displayUrl])
+	}, [displayUrl, displayAddress, displayPhone])
 	return (
 		<Wrapper>
 			<Heading>PDF Settings</Heading>
@@ -41,14 +54,36 @@ const PDFSettings = ({ settings, setSettings }) => {
 			</SettingsBlock>
 			<SettingsBlock>
 				<Heading>Footer Settings</Heading>
-				<label htmlFor='display_url'>
-					Display URL
-					<input
-						type='checkbox'
-						value={displayUrl}
-						onChange={() => setDisplayUrl(!displayUrl)}
-					/>
-				</label>
+				<hr />
+				<SettingsWrapper>
+					<label htmlFor='display_url'>
+						Display URL
+						<input
+							type='checkbox'
+							checked={displayUrl}
+							onChange={() => setDisplayUrl(!displayUrl)}
+							id='display_url'
+						/>
+					</label>
+					<label htmlFor='display_address'>
+						Display Address
+						<input
+							type='checkbox'
+							checked={displayAddress}
+							onChange={() => setDisplayAddress(!displayAddress)}
+							id='display_address'
+						/>
+					</label>
+					<label htmlFor='display_phone'>
+						Display Phone Number
+						<input
+							type='checkbox'
+							checked={displayPhone}
+							onChange={() => setDisplayPhone(!displayPhone)}
+							id='display_phone'
+						/>
+					</label>
+				</SettingsWrapper>
 				<hr />
 			</SettingsBlock>
 		</Wrapper>
