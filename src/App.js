@@ -47,7 +47,7 @@ function App({
 	const [confirmed, setConfirmed] = useState(confirmedLevels[0])
 	const [pdfSettings, setPdfSettings] = useState(defaultPdfSettings)
 	const [establishment, setEstablishment] = useState(defaultEstablishment)
-	console.log(confirmed)
+	
 	switch (confirmed) {
 		case 'pdf':
 			return (
@@ -61,7 +61,14 @@ function App({
 				/>
 			)
 		case 'confirmed':
-			return <QRPRintWrapper setConfirmed={setConfirmed} />
+			return <QRPRintWrapper 
+				setConfirmed={setConfirmed} 
+				generatorObject={generatorObject} 
+				qr_url={qr_url}
+				setGeneratorObject={setGeneratorObject} 
+				pdfSettings={pdfSettings}
+				establishment={establishment}
+				/>
 		default:
 			return (
 				<QRWizard

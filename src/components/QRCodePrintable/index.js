@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationButtons } from '../ButtonGroups'
 import { confirmedLevels } from '../../App'
+import PDFDocument from '../PDFDocument'
 
-const QRCodePrintable = ({ setConfirmed }) => {
+const QRCodePrintable = (props) => {
+	const [shouldShow, setShouldShow] = useState(false)
     return (<div>
         <NavigationButtons 
 					downCB={() => {}} 
 					downDisabled={false}
                     downText='Print QR Code'
-					upCB={() => setConfirmed(confirmedLevels[3])} 
+					upCB={() => props.setConfirmed(confirmedLevels[3])} 
 					upDisabled={false} 
                     upText='Edit With PDF'
 					/>
 
-<NavigationButtons 
-					downCB={() => setConfirmed(confirmedLevels[0])}
+		<NavigationButtons 
+					downCB={() => props.setConfirmed(confirmedLevels[0])}
 					downDisabled={false}
                     downText='Edit QR Code'
-					upCB={() => {}} 
+					upCB={() => setShouldShow(true)} 
 					upDisabled={false} 
                     upText='Save QR Code'
 					/>
+					{shouldShow && <PDFDocument {...props} />}
     </div>)
 }
 

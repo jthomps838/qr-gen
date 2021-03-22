@@ -1,10 +1,10 @@
 import React from 'react'
 import QRCodePrintable from '../../components/QRCodePrintable'
 
-const QRPRintWrapper = ({ setConfirmed }) => {
+const QRPRintWrapper = (props) => {
     return (
         <div>
-            <QRCodePrintable setConfirmed={setConfirmed} />
+            <QRCodePrintable {...props} />
         </div>
     )
 }

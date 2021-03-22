@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactPDF from '@react-pdf/renderer';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer'
 import QRCode from 'qrcode.react'
 
@@ -60,45 +61,44 @@ function PDFDocument({
 	generatorObject,
 	generatorObject: { size, bgColor, fgColor, includeMargin, imageSettings },
 	qr_url,
-	tableId = 'Table ID',
+	tableId = 'Table_ID',
 	pdfSettings,
 	establishment,
 }) {
-	console.log(establishment)
-	return (
-		<>
-			<Document style={styles.document}>
-				<Page size='A4' style={styles.page}>
-					<View style={styles.header}>
-						<Text>{generatorObject.title}</Text>
-					</View>
-					<View style={styles.tableId}>
-						<Text>{tableId}</Text>
-					</View>
-					<View style={styles.qrcode}>
-						<QRCode
-							value={qr_url}
-							renderAs='svg'
-							size={size}
-							bgColor={bgColor}
-							fgColor={fgColor}
-							includeMargin={includeMargin}
-							imageSettings={imageSettings}
-						/>
-						<Text style={styles.qrUrl}>
-							{pdfSettings.displayUrl ? <p>{qr_url}</p> : null}
-						</Text>
-					</View>
-					<View>
-						<Text style={styles.business_address}>
-							{pdfSettings.displayAddress && <p>{establishment.address} </p>}
-							{pdfSettings.displayPhone && <p>{establishment.phone}</p>}
-						</Text>
-					</View>
-				</Page>
-			</Document>
-		</>
-	)
-}
+	console.log('MADE IT HERE')
+	const doc = 	(<Document style={styles.document}>
+	<Page size='A4' style={styles.page}>
+<View style={styles.header}>
+	<Text>{generatorObject.title}</Text>
+</View>
+<View style={styles.tableId}>
+	<Text>{tableId}</Text>
+</View>
+<View style={styles.qrcode}>
+	<QRCode
+		value={qr_url}
+		renderAs='svg'
+		size={size}
+		bgColor={bgColor}
+		fgColor={fgColor}
+		includeMargin={includeMargin}
+		imageSettings={imageSettings}
+	/>
+	<Text style={styles.qrUrl}>
+		{pdfSettings.displayUrl ? <p>{qr_url}</p> : null}
+	</Text>
+</View>
+<View>
+	<Text style={styles.business_address}>
+		{pdfSettings.displayAddress && <p>{establishment.address} </p>}
+		{pdfSettings.displayPhone && <p>{establishment.phone}</p>}
+	</Text>
+</View>
+</Page>
+	</Document>)
+
+	
+	return ReactPDF.render(doc)
+		}
 
 export default PDFDocument
